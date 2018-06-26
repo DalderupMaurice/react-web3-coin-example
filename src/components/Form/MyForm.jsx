@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Form, Icon, Input, Button } from "antd";
 
-import "./MyForm.css";
+// import "./MyForm.css";
 
 const FormItem = Form.Item;
 
@@ -46,6 +46,7 @@ class MyForm extends Component {
             rules: [{ required: true, message: "Please input a value!" }]
           })(
             <Input
+              style={{ width: "50vh" }}
               prefix={<Icon type="edit" style={{ color: "rgba(0,0,0,.25)" }} />}
               placeholder="Value"
             />

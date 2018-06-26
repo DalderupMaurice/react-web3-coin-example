@@ -8,9 +8,7 @@ import DefaultRoute from "./DefaultRoute";
 
 // Pages
 import {
-  DashboardPage,
   HomePage,
-  LoginPage,
   PageNotFound
 } from "../../containers";
 
@@ -21,12 +19,6 @@ class Routing extends PureComponent {
     return (
       <Switch>
         <DefaultRoute exact path="/" component={HomePage} appState={appState} />
-        <DefaultRoute path="/login" component={LoginPage} appState={appState} />
-        <DefaultRoute
-          path="/dashboard"
-          component={DashboardPage}
-          appState={appState}
-        />
         {/* <PrivateRoute */}
         {/* exact */}
         {/* path="/dashboard" */}

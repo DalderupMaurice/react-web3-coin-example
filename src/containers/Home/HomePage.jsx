@@ -3,21 +3,81 @@ import { notification } from "antd";
 
 import Web3Service from "../../Services/Web3Service";
 
-import contract from "../../assets/contract/build/contracts/Coin.json";
+import CoinContract from "../../assets/contract/build/contracts/Coin.json";
 import MyForm from "../../components/Form/MyForm";
+import DataDisplay from "../../components/DataDisplay/DataDisplay";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      metaMaskAcc: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+      otherRandomAcc: "",
+      gasCost: 0,
+      account: {},
+      contract: {},
+      txAddUser: {},
+      txInitUser: {},
+      retrievedUser: {}
+    };
+
+    this.web3Service = null;
   }
 
-  componentDidMount() {
-    console.log(contract);
-
-    this.web3Service = new Web3Service(contract.abi); // no param, assuming metamask
+  async componentDidMount() {
+    this.web3Service = await new Web3Service(CoinContract); // no param, assuming metamask
+    this.setState({
+      contract: this.web3Service.getContract(),
+      account: this.web3Service.createAccount().address
+    });
   }
+
+  calculateGas = async userToAdd => {
+    const { contract } = this.state;
+    await this.setState({
+      gasCost: await contract.methods.addUser(userToAdd.value).estimateGas()
+    });
+    this.openNotification(`Gas calculated! ${this.state.gasCost}`);
+  };
+
+  addUser = async userToAdd => {
+    const { contract, metaMaskAcc } = this.state;
+    await this.setState({
+      txAddUser: await contract.methods.addUser(userToAdd.value).send({
+        from: metaMaskAcc
+      })
+    });
+    this.openNotification(
+      `User Added in SC! ${this.state.txAddUser.transactionHash}`
+    );
+  };
+
+  initializeUser = async amountCoins => {
+    const { account, contract, metaMaskAcc } = this.state;
+    await this.setState({
+      txInitUser: await contract.methods
+        .setAssignableCoins(account, amountCoins.value)
+        .send({
+          from: metaMaskAcc
+        })
+    });
+    this.openNotification(
+      `User coins initialized in SC! ${this.state.txAddUser.transactionHash}`
+    );
+  };
+
+  getUser = async givenUser => {
+    const { contract, metaMaskAcc } = this.state;
+    await this.setState({
+      retrievedUser: await contract.methods
+        .assignableCoins(givenUser.value)
+        .call({
+          from: metaMaskAcc
+        })
+    });
+    this.openNotification(`User Added in SC! ${this.state.retrievedUser}`);
+  };
 
   openNotification = (title, message) => {
     const args = {
@@ -28,21 +88,36 @@ class HomePage extends Component {
     notification.open(args);
   };
 
-  handleSubmit = () => {
-    const account = this.web3Service.createAccount();
-    const contract = this.web3Service.getContract();
-    console.log("=======");
-    console.log(contract);
-    const gasCost = contract.methods.addUser(account.address).estimateGas();
-  };
-
   render() {
-    const { tx } = this.state;
+    const {
+      gasCost,
+      txAddUser,
+      account,
+      retrievedUser,
+      txInitUser
+    } = this.state;
 
     return (
       <div>
-        <MyForm handleSubmit={this.handleSubmit} btnText="Send Transaction" />
-        {/* <DataDisplay asset={this.state.tx} /> */}
+        <DataDisplay text="Current account: " data={account} />
+
+        <MyForm handleSubmit={this.calculateGas} btnText="Calculate Gas" />
+        <DataDisplay text="Gas cost for operation: " data={gasCost} />
+
+        <MyForm handleSubmit={this.addUser} btnText="Add user" />
+        <DataDisplay
+          text="Added user, txHash: "
+          data={txAddUser.transactionHash}
+        />
+
+        <MyForm handleSubmit={this.initializeUser} btnText="Give coins" />
+        <DataDisplay
+          text="Gave coins, txHash: "
+          data={txInitUser.transactionHash}
+        />
+
+        <MyForm handleSubmit={this.getUser} btnText="Get user" />
+        <DataDisplay text="Amount of coins: " data={retrievedUser} />
       </div>
     );
   }
