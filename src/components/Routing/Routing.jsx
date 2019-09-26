@@ -7,10 +7,7 @@ import DefaultRoute from "./DefaultRoute";
 // import PrivateRoute from "./PrivateRoute";
 
 // Pages
-import {
-  HomePage,
-  PageNotFound
-} from "../../containers";
+import { HomePage, PageNotFound } from "../../containers";
 
 class Routing extends PureComponent {
   render() {

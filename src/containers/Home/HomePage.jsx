@@ -12,8 +12,7 @@ class HomePage extends Component {
     super(props);
 
     this.state = {
-      metaMaskAcc: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
-      otherRandomAcc: "",
+      metaMaskAcc: "0xBd043c73089D14F0CE6db2518F6B721cCB3c2DC6",
       gasCost: 0,
       account: {},
       contract: {},
@@ -26,20 +25,13 @@ class HomePage extends Component {
   }
 
   async componentDidMount() {
+    window.ethereum.enable();
     this.web3Service = await new Web3Service(CoinContract); // no param, assuming metamask
     this.setState({
       contract: this.web3Service.getContract(),
       account: this.web3Service.createAccount().address
     });
   }
-
-  calculateGas = async userToAdd => {
-    const { contract } = this.state;
-    await this.setState({
-      gasCost: await contract.methods.addUser(userToAdd.value).estimateGas()
-    });
-    this.openNotification(`Gas calculated! ${this.state.gasCost}`);
-  };
 
   addUser = async userToAdd => {
     const { contract, metaMaskAcc } = this.state;
@@ -51,6 +43,14 @@ class HomePage extends Component {
     this.openNotification(
       `User Added in SC! ${this.state.txAddUser.transactionHash}`
     );
+  };
+
+  calculateGas = async userToAdd => {
+    const { contract } = this.state;
+    await this.setState({
+      gasCost: await contract.methods.addUser(userToAdd.value).estimateGas()
+    });
+    this.openNotification(`Gas calculated! ${this.state.gasCost}`);
   };
 
   initializeUser = async amountCoins => {

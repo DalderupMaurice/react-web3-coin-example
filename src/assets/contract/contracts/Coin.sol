@@ -19,7 +19,7 @@ contract Coin {
 	}
 
 	modifier onlyByCreator {
-        require(msg.sender == adminAddress);
+        require(msg.sender == adminAddress, "Only admins can call this function");
         _;
     }
 
@@ -37,12 +37,12 @@ contract Coin {
 	}
 
 	function burnCoin(address addr, uint amount) public onlyByCreator{
-		require((spendableCoins[addr] - amount) >= 0);
+		require((spendableCoins[addr] - amount) >= 0, "Balance cannot be below 0");
 		spendableCoins[addr] -= amount;
 	}
 
 	function sendCoin(address receiver, uint amount, string reason) public {
-		require(assignableCoins[msg.sender] >= amount && receiver != msg.sender && amount <= 3);
+		require(assignableCoins[msg.sender] >= amount && receiver != msg.sender && amount <= 3, "Can't send coins to yourself");
 		spendableCoins[receiver] = spendableCoins[receiver] + (amount);
 		assignableCoins[msg.sender] = assignableCoins[msg.sender] - amount;
 		emit Transfer(msg.sender, receiver, amount, reason, block.timestamp);
