@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.21 <0.6.0;
 
 contract Coin {
 	address adminAddress;
@@ -41,7 +41,7 @@ contract Coin {
 		spendableCoins[addr] -= amount;
 	}
 
-	function sendCoin(address receiver, uint amount, string reason) public {
+	function sendCoin(address receiver, uint amount, string memory reason) public {
 		require(assignableCoins[msg.sender] >= amount && receiver != msg.sender && amount <= 3, "Can't send coins to yourself");
 		spendableCoins[receiver] = spendableCoins[receiver] + (amount);
 		assignableCoins[msg.sender] = assignableCoins[msg.sender] - amount;
