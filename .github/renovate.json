@@ -1,0 +1,30 @@
+{
+  "extends": ["config:base"],
+  "ignoreDeps": [],
+  "schedule": ["on monday"],
+  "labels": ["Renovate 🌴"],
+  "semanticCommits": true,
+  "statusCheckVerify": true,
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "semanticCommitType": "renovate"
+    },
+    {
+      "packageNames": ["eslint", "stylelint"],
+      "groupName": "lint"
+    },
+    {
+      "packageNames": ["fortawesome"],
+      "groupName": "fortawesome"
+    },
+    {
+      "packageNames": ["babel"],
+      "groupName": "babel"
+    },
+    {
+      "packageNames": ["enzyme"],
+      "groupName": "enzyme"
+    }
+  ]
+}

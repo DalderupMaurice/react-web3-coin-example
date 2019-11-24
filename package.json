@@ -6,7 +6,7 @@
   "description": "This creates a project boilerplate for React with a custom stack",
   "scripts": {
     "precommit": "cd client && yarn lint --fix",
-    "lint": "eslint 'src/**/*.js*' --fix",
+    "lint": "eslint 'client/**/*.js*' --fix",
     "start": "docker-compose up"
   }
 }
