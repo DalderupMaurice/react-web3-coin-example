@@ -12,7 +12,7 @@ class HomePage extends Component {
     super(props);
 
     this.state = {
-      metaMaskAcc: '0xBd043c73089D14F0CE6db2518F6B721cCB3c2DC6',
+      metaMaskAcc: '0x603A5992ade2bE3E2431c923f3661D3B1bb80889',
       gasCost: 0,
       account: {},
       contract: {},
