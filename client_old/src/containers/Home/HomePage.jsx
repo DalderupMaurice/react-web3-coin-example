@@ -3,7 +3,7 @@ import { notification } from 'antd';
 
 import Web3Service from '../../Services/Web3Service';
 
-import CoinContract from '../../assets/build/contracts/Coin.json';
+import CoinContract from '../../assets/build/contracts/Coin.json.js';
 import MyForm from '../../components/Form/MyForm';
 import DataDisplay from '../../components/DataDisplay/DataDisplay';
 

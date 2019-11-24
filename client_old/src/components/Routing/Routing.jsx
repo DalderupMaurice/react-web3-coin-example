@@ -1,13 +1,13 @@
-import React, { PureComponent } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { PureComponent } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Routing
-import DefaultRoute from "./DefaultRoute";
+import DefaultRoute from './DefaultRoute';
 // import PrivateRoute from "./PrivateRoute";
 
 // Pages
-import { HomePage, PageNotFound } from "../../containers";
+import { HomePage, PageNotFound } from '../../containers';
 
 class Routing extends PureComponent {
   render() {

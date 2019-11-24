@@ -1,16 +1,16 @@
-import axios from "axios";
+import axios from 'axios';
 
 let currentConnection = null;
 let currentToken = null;
 
-export default function Connection(baseURL, token = "", headers = null) {
+export default function Connection(baseURL, token = '', headers = null) {
   currentToken = token;
   currentConnection = axios.create({
     baseURL,
     timeout: 10000,
     headers: headers || {
-      Accept: "application/json",
-      "X-Access-Token": currentToken
+      Accept: 'application/json',
+      'X-Access-Token': currentToken
     }
   });
 
@@ -26,10 +26,10 @@ export default function Connection(baseURL, token = "", headers = null) {
 
 export function getConnection() {
   if (currentConnection) return currentConnection;
-  throw new Error("Missing connection to API");
+  throw new Error('Missing connection to API');
 }
 
 export function getToken() {
   if (currentConnection) return currentToken;
-  throw new Error("Missing connection to API");
+  throw new Error('Missing connection to API');
 }
