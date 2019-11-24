@@ -3,9 +3,9 @@ import { Layout } from 'antd';
 
 import MenuItems from './MenuItems';
 
-const { Sider } = Layout;
+import './Menu.scss';
 
-import './Menu.css';
+const { Sider } = Layout;
 
 const Menu = React.memo((props: any) => {
   const [collapsed, setCollapsed] = useState(false);

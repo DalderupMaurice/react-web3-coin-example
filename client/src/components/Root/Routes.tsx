@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import DefaultRoute from './Route';
 import App from './Root';
-import PageNotFound from './Root';
+import PageNotFound from '../NotFound';
 
 const routes = React.memo((props: any) => {
   return (
