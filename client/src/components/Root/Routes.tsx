@@ -1,11 +1,11 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import DefaultRoute from './Route';
-import App from './Root';
+import App from '../App';
 import PageNotFound from '../NotFound';
 
-const routes = React.memo((props: any) => {
+const Routes = React.memo((props: any) => {
   return (
     <Switch>
       <DefaultRoute exact path="/" component={App} />
@@ -13,3 +13,5 @@ const routes = React.memo((props: any) => {
     </Switch>
   );
 });
+
+export default Routes;

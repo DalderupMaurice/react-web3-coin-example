@@ -8,7 +8,7 @@ import './Menu.scss';
 const { Item, SubMenu } = Menu;
 
 const MenuRoutes = React.memo((props: any) => (
-  <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+  <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline">
     {/* ==================
           Home
     ================== */}
