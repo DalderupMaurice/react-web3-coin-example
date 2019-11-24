@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import DefaultRoute from './Route';
-import App from './App';
-import PageNotFound from './App';
+import App from './Root';
+import PageNotFound from './Root';
 
 const routes = React.memo((props: any) => {
   return (

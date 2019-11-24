@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Layout } from "antd";
+import React, { Component } from 'react';
+import { Layout } from 'antd';
 
-import MenuRoutes from "./MenuRoutes";
+import MenuRoutes from './MenuRoutes';
 
-import "./CustomSider.scss";
+import './CustomSider.scss';
 
 const { Sider } = Layout;
 

@@ -1,59 +1,25 @@
-/* eslint-disable */
-import React from "react";
+import React, { useState } from 'react';
+import { Layout } from 'antd';
 
-import { Icon, Menu } from "antd";
-import { Link } from "react-router-dom";
+import MenuItems from './MenuItems';
 
-import "./MenuRoutes.scss";
+const { Sider } = Layout;
 
-const { Item, SubMenu } = Menu;
+import './Menu.css';
 
-const MenuRoutes = () => (
-  <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-    {/* ==================
-          Home
-    ================== */}
-    <Item key="nav-home">
-      <Icon type="home" />
-      <span>Home</span>
-      <Link to="/" />
-    </Item>
+const Menu = React.memo((props: any) => {
+  const [collapsed, setCollapsed] = useState(false);
 
-    {/* ==================
-        About
-    ================== */}
-    <Item key="nav-about">
-      <Icon type="question-circle-o" />
-      <span>About</span>
-      <Link to="/about" />
-    </Item>
+  const handleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
 
-    {/* ==================
-        Settings: profile, logout
-    ================== */}
-    <SubMenu
-      key="nav-sub-settings"
-      title={
-        <span>
-          <Icon type="setting" />
-          <span>Settings</span>
-        </span>
-      }
-    >
-      <Item key="nav-sub-settings-uprofile">
-        <span>User Profile</span>
-        <Link to="/profile" />
-      </Item>
-      <Item key="nav-sub-settings-logout">
-        <span>Sign Out</span>
-        <Link to="/login" />
-      </Item>
-    </SubMenu>
+  return (
+    <Sider collapsible collapsed={collapsed} onCollapse={handleCollapse}>
+      <div className="logo" />
+      <MenuItems />
+    </Sider>
+  );
+});
 
-    {/* ==================
-        Rest...
-    ================== */}
-  </Menu>
-);
-
-export default MenuRoutes;
+export default Menu;
