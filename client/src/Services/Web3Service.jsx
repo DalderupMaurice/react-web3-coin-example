@@ -1,8 +1,10 @@
-import Web3 from "web3";
-import _ from "lodash";
+import Web3 from 'web3';
+import _ from 'lodash';
 
 export default class Web3Service {
   constructor(contract = null, connectionUrl = null) {
+    console.log('connection', connectionUrl);
+    console.log('connection', Web3.givenProvider);
     this.web3 = new Web3(connectionUrl || Web3.givenProvider);
 
     this.contract = {};
@@ -11,7 +13,7 @@ export default class Web3Service {
 
   addContract = async contractJSON => {
     this.contract = await new this.web3.eth.Contract(contractJSON.abi);
-    const key = _.findKey(contractJSON.networks, "address");
+    const key = _.findKey(contractJSON.networks, 'address');
     this.contract.options.address = contractJSON.networks[key].address;
   };
 

@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  react-web3:
+    container_name: react-web3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - './truffle:/app/src/assets'
+      - './client:/app'
+      - '/app/node_modules'
+    ports:
+      - '1234:1234'
+    environment:
+      - NODE_ENV=development

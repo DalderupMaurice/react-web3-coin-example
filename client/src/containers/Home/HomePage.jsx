@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { notification } from "antd";
+import React, { Component } from 'react';
+import { notification } from 'antd';
 
-import Web3Service from "../../Services/Web3Service";
+import Web3Service from '../../Services/Web3Service';
 
-import CoinContract from "../../assets/contract/build/contracts/Coin.json";
-import MyForm from "../../components/Form/MyForm";
-import DataDisplay from "../../components/DataDisplay/DataDisplay";
+import CoinContract from '../../assets/build/contracts/Coin.json';
+import MyForm from '../../components/Form/MyForm';
+import DataDisplay from '../../components/DataDisplay/DataDisplay';
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      metaMaskAcc: "0xBd043c73089D14F0CE6db2518F6B721cCB3c2DC6",
+      metaMaskAcc: '0x603A5992ade2bE3E2431c923f3661D3B1bb80889',
       gasCost: 0,
       account: {},
       contract: {},
@@ -40,9 +40,7 @@ class HomePage extends Component {
         from: metaMaskAcc
       })
     });
-    this.openNotification(
-      `User Added in SC! ${this.state.txAddUser.transactionHash}`
-    );
+    this.openNotification(`User Added in SC! ${this.state.txAddUser.transactionHash}`);
   };
 
   calculateGas = async userToAdd => {
@@ -56,25 +54,19 @@ class HomePage extends Component {
   initializeUser = async amountCoins => {
     const { account, contract, metaMaskAcc } = this.state;
     await this.setState({
-      txInitUser: await contract.methods
-        .setAssignableCoins(account, amountCoins.value)
-        .send({
-          from: metaMaskAcc
-        })
+      txInitUser: await contract.methods.setAssignableCoins(account, amountCoins.value).send({
+        from: metaMaskAcc
+      })
     });
-    this.openNotification(
-      `User coins initialized in SC! ${this.state.txAddUser.transactionHash}`
-    );
+    this.openNotification(`User coins initialized in SC! ${this.state.txAddUser.transactionHash}`);
   };
 
   getUser = async givenUser => {
     const { contract, metaMaskAcc } = this.state;
     await this.setState({
-      retrievedUser: await contract.methods
-        .assignableCoins(givenUser.value)
-        .call({
-          from: metaMaskAcc
-        })
+      retrievedUser: await contract.methods.assignableCoins(givenUser.value).call({
+        from: metaMaskAcc
+      })
     });
     this.openNotification(`User Added in SC! ${this.state.retrievedUser}`);
   };
@@ -89,13 +81,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const {
-      gasCost,
-      txAddUser,
-      account,
-      retrievedUser,
-      txInitUser
-    } = this.state;
+    const { gasCost, txAddUser, account, retrievedUser, txInitUser } = this.state;
 
     return (
       <div>
@@ -105,16 +91,10 @@ class HomePage extends Component {
         <DataDisplay text="Gas cost for operation: " data={gasCost} />
 
         <MyForm handleSubmit={this.addUser} btnText="Add user" />
-        <DataDisplay
-          text="Added user, txHash: "
-          data={txAddUser.transactionHash}
-        />
+        <DataDisplay text="Added user, txHash: " data={txAddUser.transactionHash} />
 
         <MyForm handleSubmit={this.initializeUser} btnText="Give coins" />
-        <DataDisplay
-          text="Gave coins, txHash: "
-          data={txInitUser.transactionHash}
-        />
+        <DataDisplay text="Gave coins, txHash: " data={txInitUser.transactionHash} />
 
         <MyForm handleSubmit={this.getUser} btnText="Get user" />
         <DataDisplay text="Amount of coins: " data={retrievedUser} />
