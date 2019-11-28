@@ -17,9 +17,6 @@ WORKDIR /app
 ## Copy built node modules and binaries without including the toolchain
 COPY --from=builder node_modules /app/node_modules
 
-RUN ls /app
-RUN ls /app/node_modules
-
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 

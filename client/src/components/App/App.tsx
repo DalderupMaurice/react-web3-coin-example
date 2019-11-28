@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const App = React.memo((props: any) => {
   return <h1>Hello</h1>;

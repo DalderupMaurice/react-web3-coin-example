@@ -11,6 +11,6 @@ services:
       - './client:/app'
       - '/app/node_modules'
     ports:
-      - '1234:1234'
+      - '3000:3000'
     environment:
       - NODE_ENV=development
