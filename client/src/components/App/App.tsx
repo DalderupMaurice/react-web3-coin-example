@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+import RegisterUser from '../Actions/RegisterUser';
 
 const App = React.memo((props: any) => {
-  return <h1>Hello</h1>;
+  return (
+    <>
+      <RegisterUser />
+    </>
+  );
 });
 
 export default App;
