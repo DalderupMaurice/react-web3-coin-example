@@ -16,7 +16,7 @@ declare global {
 
 const Root = React.memo((props: any) => {
   // Request to disabled MetaMask privacy mode
-  window.ethereum.enable();
+  // window.ethereum.enable();
 
   return (
     <Layout style={{ minHeight: '100vh' }}>

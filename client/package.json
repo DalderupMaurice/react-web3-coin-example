@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@types/jest": "24.0.23",
+    "@types/lodash": "4.14.149",
     "@types/node": "12.12.12",
     "@types/react": "16.9.13",
     "@types/react-dom": "16.9.4",
@@ -21,6 +22,7 @@
     "antd": "3.25.2",
     "connected-react-router": "6.6.1",
     "easy-peasy": "3.2.3",
+    "lodash": "4.17.15",
     "node-sass": "4.13.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
