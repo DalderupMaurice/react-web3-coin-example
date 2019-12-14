@@ -24,7 +24,7 @@ export default ({ dispatch, getState }: any) => (next: any) => (action: any) => 
       type: types.CALL
     });
   
-    return func().then(
+    return func(payload).then(
       (result: any) =>
         // TODO dispatch generated success and failure actions???
         dispatch({

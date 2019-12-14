@@ -6,7 +6,6 @@ import userActions, { registerFailed, registerSuccess } from './web3Actions';
 const web3Service = new Web3Service();
 
 export function* registerSaga(arg1: any) {
-  console.log('paylad', arg1);
   try {
     const user = yield call(web3Service.register, arg1.payload);
     yield put(registerSuccess(user));

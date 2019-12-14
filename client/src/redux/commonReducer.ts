@@ -18,9 +18,6 @@ const commonReducer = (
   actionState: ActionState
 ) => {
 
-  console.log("State", state)
-  console.log("actionState", actionState)
-
   switch (actionState.meta.type) {
     case ACTION_CALL:
       return { ...state, progress: LOADING, rollbackProgress: state.progress };
