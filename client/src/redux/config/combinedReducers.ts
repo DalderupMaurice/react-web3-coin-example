@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-import commonReducer from './commonReducer';
+import commonReducer from '../commonReducer';
 
 export default (history: any) =>
   combineReducers({

@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import './index.scss';
 
-import Root from './components/Root/Root';
+import Root from './containers/Root/Root';
 import configureStore from './redux/config/configureStore';
 
 // import { restoreSession } from "./redux/users/userActions";

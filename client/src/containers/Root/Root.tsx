@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 
 import Routes from './Routes';
-import Menu from '../Menu/Menu';
+import Menu from '../../components/Menu/Menu';
 
 import './Root.scss';
 

@@ -1,5 +1,5 @@
 import { get, set, unset } from "lodash";
-import globalInitialState, { commonInitialState } from "./initialState";
+import globalInitialState, { commonInitialState } from "./config/initialState";
 
 export const ACTION_CALL: ActionType = "ACTION/CALL";
 export const ACTION_CANCEL: ActionType = "ACTION/CANCEL";
