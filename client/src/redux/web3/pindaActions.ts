@@ -16,7 +16,7 @@
 import actionsCreator from "../../utils/actionsCreator";
 import Web3Service from "../../services/Web3Service";
 
-const id = "myActionId";
+const id = "mySecondAction";
 
 export const registerSuccess = (user: any) => ({
   type: `${id}/ACTION/SUCCESS`,

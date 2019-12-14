@@ -32,13 +32,13 @@ const createActionTypes = (statePath: string) => ({
 export default function createActions(id: string, createAdaptor: any) {
   const actionTypes = createActionTypes(id);
 
-  const call = (props: any) => (console.log("call props", props), ({
+  const call = (props: any) => ({
     type: actionTypes.CALL,
     types: actionTypes,
     meta: { type: ACTION_CALL, id },
     func: createAdaptor,
     payload: props
-  }));
+  });
 
   const cancel = () => ({
     type: actionTypes.CANCEL,

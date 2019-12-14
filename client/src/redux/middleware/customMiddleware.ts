@@ -1,8 +1,6 @@
 export default ({ dispatch, getState }: any) => (next: any) => (action: any) => {
     const { types, func = () => ({}), payload = {} } = action;
   
-    console.log('Incoming in middleware ', action);
-
     if (!types) {
       // Normal action: pass it on
       return next(action);

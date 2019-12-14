@@ -1,8 +1,22 @@
-import { takeLatest } from 'redux-saga/effects';
+import { fork, take, cancel } from 'redux-saga/effects';
 
-import { registerSaga } from '../web3/web3Saga';
-import userActions from "../web3/web3Actions"
+import commonSaga from '../commonSaga';
+
+// Custom implementation of takeLatest, extended with actionType
+const takeLatestByActionType = (pattern: any, saga: any, ...args: any) => fork(function*() {
+  let lastTask
+  let lastActionType;
+
+  while (true) {
+    const action = yield take(pattern)
+    if (lastTask && lastActionType === action.type) {
+      yield cancel(lastTask) // cancel is no-op if the task has already terminated
+    }
+    lastTask = yield fork(saga, ...args.concat(action))
+    lastActionType = action.type;
+  }
+})
 
 export default function* rootSage() {
-  yield takeLatest(userActions.actionTypes.CALL, registerSaga);
+  yield takeLatestByActionType((arg: any) => arg.type.includes("ACTION/CALL"), commonSaga);
 }
