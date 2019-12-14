@@ -16,7 +16,7 @@ import rootSaga from './rootSaga';
 export default function configureStore(initialState: any, history: any) {
   const sagaMiddleWare = createSagaMiddleware();
 
-  const enhancer = composeWithDevTools(applyMiddleware(customMiddleware, thunk, sagaMiddleWare, routerMiddleware(history)));
+  const enhancer = composeWithDevTools(applyMiddleware(sagaMiddleWare, routerMiddleware(history)));
 
   const store = createStore(createRootReducer(history), initialState, enhancer);
   sagaMiddleWare.run(rootSaga);

@@ -14,6 +14,7 @@
 // });
 
 import actionsCreator from "../../utils/actionsCreator";
+import Web3Service from "../../services/Web3Service";
 
 const id = "myActionId";
 
@@ -38,6 +39,11 @@ export const registerFailed = (error: any) => ({
 
 const userActions = actionsCreator(id, async (a: any, b: any, c: any, d: any) => {
   console.log("LOGGING ALL PARAMS", a, b, c, d);
+
+  const x = await new Web3Service().register(a);
+
+  console.log("results ", x)
+
   return { a, b, c, d };
 });
 
