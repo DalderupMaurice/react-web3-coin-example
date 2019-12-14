@@ -24,15 +24,17 @@ const commonReducer = (
       return {
         ...state,
         progress: LOADED,
-        rollbackProgress: LOADED,
+        rollbackProgress: state.progress,
         data: actionState.payload,
+        error: null,
         loadedCount: state.loadedCount + 1
       };
     case ACTION_FAILURE:
       return {
         ...state,
         progress: FAILED,
-        rollbackProgress: FAILED,
+        rollbackProgress: state.progress,
+        data: null,
         error: actionState.payload
       };
     case ACTION_RESET:
