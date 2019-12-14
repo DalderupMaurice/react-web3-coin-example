@@ -20,7 +20,7 @@ export default ({ dispatch, getState }: any) => (next: any) => (action: any) => 
     }
   
     dispatch({
-      ...payload,
+      payload,
       type: types.CALL
     });
   
@@ -28,13 +28,13 @@ export default ({ dispatch, getState }: any) => (next: any) => (action: any) => 
       (result: any) =>
         // TODO dispatch generated success and failure actions???
         dispatch({
-          ...payload,
+          payload,
           result,
           type: types.SUCCESS
         }),
       (error: any) =>
         dispatch({
-          ...payload,
+          payload,
           error,
           type: types.FAILURE
         })

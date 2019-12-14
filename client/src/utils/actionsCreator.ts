@@ -32,37 +32,47 @@ const createActionTypes = (statePath: string) => ({
 export default function createActions(id: string, createAdaptor: any) {
   const actionTypes = createActionTypes(id);
 
-  console.log("createAdapter", createAdaptor);
-
-  const call = (props: any) => ({
-    batch: false,
+  const call = (props: any) => (console.log("call props", props), ({
     type: actionTypes.CALL,
     types: actionTypes,
     meta: { type: ACTION_CALL, id },
     func: createAdaptor,
     payload: props
-  });
+  }));
 
   const cancel = () => ({
-    batch: false,
     type: actionTypes.CANCEL,
     types: actionTypes,
     meta: { type: ACTION_CANCEL, id }
   });
 
   const reset = () => ({
-    batch: false,
     type: actionTypes.RESET,
     types: actionTypes,
     meta: { type: ACTION_RESET, id }
   });
 
   const clean = () => ({
-    batch: false,
     type: actionTypes.CLEAN,
     types: actionTypes,
     meta: { type: ACTION_CLEAN, id }
   });
 
-  return { id, call, cancel, reset, clean, actionTypes };
+  // return {
+  //   id,
+  //   [`${id}Call`]: call,
+  //   [`cancel${id}`]: cancel,
+  //   [`reset${id}`]: reset,
+  //   [`clean${id}`]: clean,
+  //   actionTypes
+  // };
+
+  return {
+    id,
+    call,
+    cancel,
+    reset,
+    clean,
+    actionTypes
+  };
 }

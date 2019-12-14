@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { register } from "../../redux/web3/web3Actions"
+import userActions from "../../redux/web3/web3Actions"
 
 const RegisterUser = React.memo((props: any) => {
   const { data, error, loadedCount, progress, rollbackProgress } = useSelector((state: any) => state.nos.register);
@@ -14,7 +14,7 @@ const RegisterUser = React.memo((props: any) => {
       <h1>Rollback Progress: {rollbackProgress}</h1>
       <h1>Data: {data}</h1>
       <h1>Error: {error}</h1>
-      <button onClick={() => dispatch(register(`Pingu-${Math.random()}`))}>Hello</button>
+      <button onClick={() => dispatch(userActions.call(`Pingu-${Math.random()}`))}>Hello</button>
     </>
   );
 });
