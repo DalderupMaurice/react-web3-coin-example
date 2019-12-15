@@ -5,8 +5,7 @@ declare type ActionType =
   | "ACTION/CANCEL"
   | "ACTION/SUCCESS"
   | "ACTION/FAILURE"
-  | "ACTION/RESET"
-  | "ACTION/CLEAN";
+  | "ACTION/RESET";
 
 declare type Data = Object | null;
 declare type StateError = string | null;
@@ -37,5 +36,4 @@ declare type ActionTypeMap = {
   SUCCESS: string;
   FAILURE: string;
   RESET: string;
-  CLEAN: string;
 };

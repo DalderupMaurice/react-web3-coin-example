@@ -1,13 +1,11 @@
-import { get, set, unset } from "lodash";
+import { get, set } from "lodash";
 import globalInitialState, { commonInitialState } from "../config/initialState";
-import initialState from "../config/initialState";
 
 export const ACTION_CALL: ActionType = "ACTION/CALL";
 export const ACTION_CANCEL: ActionType = "ACTION/CANCEL";
 export const ACTION_SUCCESS: ActionType = "ACTION/SUCCESS";
 export const ACTION_FAILURE: ActionType = "ACTION/FAILURE";
 export const ACTION_RESET: ActionType = "ACTION/RESET";
-export const ACTION_CLEAN: ActionType = "ACTION/CLEAN";
 
 export const INITIAL: Progress = "INITIAL";
 export const LOADING: Progress = "LOADING";
@@ -51,9 +49,7 @@ const commonReducer = (
 function actionReducer(state: Object = {}, actionState: ActionState): Object {
   const { id, type } = actionState.meta;
 
-  if (type === ACTION_CLEAN) {
-    return set({ ...state }, id, initialState);
-  } else if (type) {
+  if (type) {
     return set({ ...state }, id, commonReducer(get(state, id), actionState));
   } else {
     return state;
@@ -84,6 +80,5 @@ const ACTION_TYPES = [
   ACTION_CANCEL,
   ACTION_SUCCESS,
   ACTION_FAILURE,
-  ACTION_RESET,
-  ACTION_CLEAN
+  ACTION_RESET
 ];

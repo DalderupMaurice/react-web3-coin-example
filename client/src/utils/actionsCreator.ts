@@ -18,15 +18,13 @@ export const ACTION_CANCEL = "ACTION/CANCEL";
 export const ACTION_SUCCESS = "ACTION/SUCCESS";
 export const ACTION_FAILURE = "ACTION/FAILURE";
 export const ACTION_RESET = "ACTION/RESET";
-export const ACTION_CLEAN = "ACTION/CLEAN";
 
 const createActionTypes = (statePath: string) => ({
   CALL: `${statePath}/${ACTION_CALL}`,
   CANCEL: `${statePath}/${ACTION_CANCEL}`,
   SUCCESS: `${statePath}/${ACTION_SUCCESS}`,
   FAILURE: `${statePath}/${ACTION_FAILURE}`,
-  RESET: `${statePath}/${ACTION_RESET}`,
-  CLEAN: `${statePath}/${ACTION_CLEAN}`
+  RESET: `${statePath}/${ACTION_RESET}`
 });
 
 export default function createActions(id: string, createAdaptor: any) {
@@ -52,18 +50,11 @@ export default function createActions(id: string, createAdaptor: any) {
     meta: { type: ACTION_RESET, id }
   });
 
-  const clean = () => ({
-    type: actionTypes.CLEAN,
-    types: actionTypes,
-    meta: { type: ACTION_CLEAN, id }
-  });
-
   // return {
   //   id,
   //   [`${id}Call`]: call,
   //   [`cancel${id}`]: cancel,
   //   [`reset${id}`]: reset,
-  //   [`clean${id}`]: clean,
   //   actionTypes
   // };
 
@@ -72,7 +63,6 @@ export default function createActions(id: string, createAdaptor: any) {
     call,
     cancel,
     reset,
-    clean,
     actionTypes
   };
 }

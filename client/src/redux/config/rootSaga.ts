@@ -8,7 +8,7 @@ const takeLatestById = (pattern: any, saga: any, ...args: any) =>
     let lastTask: any = {};
 
     while (true) {
-      // Take any call, clean or reset action
+      // Take any call or reset action
       const action = yield take(pattern);
 
       // Cancel the previous call BY ID if it exists in ANY case
@@ -27,9 +27,7 @@ const takeLatestById = (pattern: any, saga: any, ...args: any) =>
 export default function* rootSage() {
   yield takeLatestById(
     (arg: any) =>
-      arg.type.includes("ACTION/CALL") ||
-      arg.type.includes("ACTION/RESET") ||
-      arg.type.includes("ACTION/CLEAN"),
+      arg.type.includes("ACTION/CALL") || arg.type.includes("ACTION/RESET"),
     commonSaga
   );
 }

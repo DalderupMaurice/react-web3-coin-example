@@ -8,7 +8,7 @@ const RegisterUser = React.memo((props: any) => {
   const second = useSelector((state: any) => state.nos.mySecondActionId);
   const dispatch = useDispatch();
 
-  // console.log("SEDOND ", second)
+  console.log("SEDOND ", second)
 
   return (
     <>
@@ -19,7 +19,6 @@ const RegisterUser = React.memo((props: any) => {
       <h1>Data: {JSON.stringify(data)}</h1>
       <h1>Error: {JSON.stringify(error)}</h1>
       <button onClick={() => dispatch(userActions.call(`Pingu-${Math.random()}`))}>User Actions</button>
-      <button onClick={() => dispatch(userActions.clean())}>Clean User Actions</button>
       <button onClick={() => dispatch(userActions.reset())}>Reset User Actions</button>
       <button onClick={() => dispatch(pindaActions.call(`Pingu-${Math.random()}`))}>Pinda Actions</button>
     </>
