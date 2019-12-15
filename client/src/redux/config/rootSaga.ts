@@ -1,6 +1,6 @@
 import { fork, take, cancel } from 'redux-saga/effects';
 
-import commonSaga from '../commonSaga';
+import commonSaga from '../common/commonSaga';
 
 // Custom implementation of takeLatest, extended with actionType
 const takeLatestByActionType = (pattern: any, saga: any, ...args: any) => fork(function*() {

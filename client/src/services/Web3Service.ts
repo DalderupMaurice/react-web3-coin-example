@@ -5,7 +5,7 @@ export default class Web3Service {
     const usernameId = username.split("-")[1];
 
     if(usernameId > 0.4) {
-      return Promise.reject(`Invalid username ${username}`);
+      throw new Error("Invalid username");
     }
 
     return username;

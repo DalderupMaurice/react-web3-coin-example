@@ -6,9 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 // Middleware imports
 // eslint-disable-next-line
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
 
-import customMiddleware from "../middleware/customMiddleware"
 // Root reducer
 import createRootReducer from './combinedReducers';
 import rootSaga from './rootSaga';

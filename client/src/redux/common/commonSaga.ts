@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 
-import  { registerFailed, registerSuccess } from './web3/web3Actions';
+import  { registerFailed, registerSuccess } from '../actions/web3Actions';
 
 export default function* commonSaga(arg1: any) {
   try {

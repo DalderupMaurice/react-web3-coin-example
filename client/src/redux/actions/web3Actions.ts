@@ -40,7 +40,7 @@ export const registerFailed = (error: any) => ({
 const userActions = actionsCreator(id, async (a: any, b: any, c: any, d: any) => {
   const x = await new Web3Service().register(a);
 
-  return { a, b, c, d };
+  return { x, a, b, c, d };
 });
 
 export default userActions;
