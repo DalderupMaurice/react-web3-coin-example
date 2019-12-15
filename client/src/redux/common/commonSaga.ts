@@ -1,12 +1,31 @@
 import { call, put } from 'redux-saga/effects';
 
-import  { registerFailed, registerSuccess } from '../actions/web3Actions';
+import { ACTION_SUCCESS, ACTION_FAILURE } from '../../utils/actionsCreator';
 
-export default function* commonSaga(arg1: any) {
+export default function* commonSaga(actionState: any) {
   try {
-    const user = yield call(arg1.func, arg1.payload);
-    yield put(registerSuccess(user));
+    const result = yield call(actionState.func, actionState.payload);
+    yield put(success(result, actionState.meta));
   } catch (e) {
-    yield put(registerFailed(e.message || e));
+    yield put(failure(e.message || e, actionState.meta));
   }
 }
+
+
+const success = (result: any, meta: any) => ({
+  type: `${meta.id}/ACTION/SUCCESS`,
+  payload: result,
+  meta: {
+    ...meta,
+    type: ACTION_SUCCESS,
+  }
+});
+
+const failure = (error: any, meta: any) => ({
+  type: `${meta.id}/ACTION/FAILURE`,
+  payload: error,
+  meta: {
+    ...meta,
+    type: ACTION_FAILURE,
+  }
+});

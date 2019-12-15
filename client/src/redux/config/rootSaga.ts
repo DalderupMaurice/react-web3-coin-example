@@ -1,22 +1,35 @@
-import { fork, take, cancel } from 'redux-saga/effects';
+import { fork, take, cancel } from "redux-saga/effects";
 
-import commonSaga from '../common/commonSaga';
+import commonSaga from "../common/commonSaga";
 
-// Custom implementation of takeLatest, extended with actionType
-const takeLatestByActionType = (pattern: any, saga: any, ...args: any) => fork(function*() {
-  let lastTask
-  let lastActionType;
+// Custom implementation of takeLatest
+const takeLatestById = (pattern: any, saga: any, ...args: any) =>
+  fork(function*() {
+    let lastTask: any = {};
 
-  while (true) {
-    const action = yield take(pattern)
-    if (lastTask && lastActionType === action.type) {
-      yield cancel(lastTask) // cancel is no-op if the task has already terminated
+    while (true) {
+      // Take any call, clean or reset action
+      const action = yield take(pattern);
+
+      // Cancel the previous call BY ID if it exists in ANY case
+      if (lastTask[action.meta.id]) {
+        // cancel is no-op if the task has already terminated
+        yield cancel(lastTask[action.meta.id]);
+      }
+
+      // Only execute a new saga when actionType is a CALL
+      if (action.meta.type.includes("ACTION/CALL")) {
+        lastTask[action.meta.id] = yield fork(saga, ...args.concat(action));
+      }
     }
-    lastTask = yield fork(saga, ...args.concat(action))
-    lastActionType = action.type;
-  }
-})
+  });
 
 export default function* rootSage() {
-  yield takeLatestByActionType((arg: any) => arg.type.includes("ACTION/CALL"), commonSaga);
+  yield takeLatestById(
+    (arg: any) =>
+      arg.type.includes("ACTION/CALL") ||
+      arg.type.includes("ACTION/RESET") ||
+      arg.type.includes("ACTION/CLEAN"),
+    commonSaga
+  );
 }

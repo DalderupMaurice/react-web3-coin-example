@@ -7,7 +7,7 @@ export const commonInitialState: State = {
 };
 
 export default {
-  register: {
+  myActionId: {
     ...commonInitialState
   }
 };

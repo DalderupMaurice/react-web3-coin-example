@@ -1,5 +1,6 @@
 import { get, set, unset } from "lodash";
 import globalInitialState, { commonInitialState } from "../config/initialState";
+import initialState from "../config/initialState";
 
 export const ACTION_CALL: ActionType = "ACTION/CALL";
 export const ACTION_CANCEL: ActionType = "ACTION/CANCEL";
@@ -51,7 +52,7 @@ function actionReducer(state: Object = {}, actionState: ActionState): Object {
   const { id, type } = actionState.meta;
 
   if (type === ACTION_CLEAN) {
-    return unset({ ...state }, id);
+    return set({ ...state }, id, initialState);
   } else if (type) {
     return set({ ...state }, id, commonReducer(get(state, id), actionState));
   } else {
