@@ -6,7 +6,7 @@ import useActions from "../../hooks/useActions";
 
 const RegisterUser = React.memo((props: any) => {
   const { data, error, loadedCount, progress, rollbackProgress } = useSelector((state: any) => state.nos.myActionId);
-  const second = useSelector((state: any) => state.nos.mySecondActionId);
+  const second = useSelector((state: any) => state.nos.mySecondAction);
   const dispatch = useDispatch();
   const callRegister = useActions(userActions.call);
 

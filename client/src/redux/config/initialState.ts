@@ -1,5 +1,7 @@
+import { INITIAL } from "../../utils/actionsCreator";
+
 export const commonInitialState: State = {
-  progress: "INITIAL",
+  progress: INITIAL,
   rollbackProgress: null,
   loadedCount: 0,
   data: null,

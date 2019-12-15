@@ -8,16 +8,16 @@
 //   };
 // }
 
-export const INITIAL = "INITIAL";
-export const LOADING = "LOADING";
-export const LOADED = "LOADED";
-export const FAILED = "FAILED";
+export const INITIAL: Progress = "INITIAL";
+export const LOADING: Progress = "LOADING";
+export const LOADED: Progress = "LOADED";
+export const FAILED: Progress = "FAILED";
 
-export const ACTION_CALL = "ACTION/CALL";
-export const ACTION_CANCEL = "ACTION/CANCEL";
-export const ACTION_SUCCESS = "ACTION/SUCCESS";
-export const ACTION_FAILURE = "ACTION/FAILURE";
-export const ACTION_RESET = "ACTION/RESET";
+export const ACTION_CALL: ActionType = "ACTION/CALL";
+export const ACTION_CANCEL: ActionType = "ACTION/CANCEL";
+export const ACTION_SUCCESS: ActionType = "ACTION/SUCCESS";
+export const ACTION_FAILURE: ActionType = "ACTION/FAILURE";
+export const ACTION_RESET: ActionType = "ACTION/RESET";
 
 const createActionTypes = (statePath: string) => ({
   CALL: `${statePath}/${ACTION_CALL}`,
@@ -52,7 +52,7 @@ export default function createActions(id: string, createAdaptor: any) {
 
   // return {
   //   id,
-  //   [`${id}Call`]: call,
+  //   [`${id}`]: call,
   //   [`cancel${id}`]: cancel,
   //   [`reset${id}`]: reset,
   //   actionTypes

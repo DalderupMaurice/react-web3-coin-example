@@ -1,22 +1,21 @@
 import { get, set } from "lodash";
 import globalInitialState, { commonInitialState } from "../config/initialState";
+import {
+  ACTION_CALL,
+  ACTION_SUCCESS,
+  LOADING,
+  LOADED,
+  ACTION_FAILURE,
+  FAILED,
+  ACTION_RESET,
+  ACTION_CANCEL
+} from "../../utils/actionsCreator";
 
-export const ACTION_CALL: ActionType = "ACTION/CALL";
-export const ACTION_CANCEL: ActionType = "ACTION/CANCEL";
-export const ACTION_SUCCESS: ActionType = "ACTION/SUCCESS";
-export const ACTION_FAILURE: ActionType = "ACTION/FAILURE";
-export const ACTION_RESET: ActionType = "ACTION/RESET";
-
-export const INITIAL: Progress = "INITIAL";
-export const LOADING: Progress = "LOADING";
-export const LOADED: Progress = "LOADED";
-export const FAILED: Progress = "FAILED";
-
+// TODO cleanup this file
 const commonReducer = (
   state: State = commonInitialState,
   actionState: ActionState
 ) => {
-
   switch (actionState.meta.type) {
     case ACTION_CALL:
       return { ...state, progress: LOADING, rollbackProgress: state.progress };

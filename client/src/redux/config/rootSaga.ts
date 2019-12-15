@@ -1,6 +1,8 @@
+import { Action } from "redux";
 import { fork, take, cancel } from "redux-saga/effects";
 
 import commonSaga from "../common/commonSaga";
+import { ACTION_CALL, ACTION_RESET } from "../../utils/actionsCreator";
 
 // Custom implementation of takeLatest
 const takeLatestById = (pattern: any, saga: any, ...args: any) =>
@@ -18,7 +20,7 @@ const takeLatestById = (pattern: any, saga: any, ...args: any) =>
       }
 
       // Only execute a new saga when actionType is a CALL
-      if (action.meta.type.includes("ACTION/CALL")) {
+      if (action.meta.type.includes(ACTION_CALL)) {
         lastTask[action.meta.id] = yield fork(saga, ...args.concat(action));
       }
     }
@@ -26,8 +28,9 @@ const takeLatestById = (pattern: any, saga: any, ...args: any) =>
 
 export default function* rootSage() {
   yield takeLatestById(
-    (arg: any) =>
-      arg.type.includes("ACTION/CALL") || arg.type.includes("ACTION/RESET"),
+    (action: Action) =>
+      action.type.includes(ACTION_CALL) ||
+      action.type.includes(ACTION_RESET),
     commonSaga
   );
 }

@@ -1,13 +1,8 @@
-// Imports
 import { createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
-// Middleware imports
-// eslint-disable-next-line
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-// Root reducer
 import createRootReducer from './combinedReducers';
 import rootSaga from './rootSaga';
 

@@ -15,7 +15,7 @@ export default function* commonSaga(actionState: any) {
 
 
 const success = (result: any, meta: any) => ({
-  type: `${meta.id}/ACTION/SUCCESS`,
+  type: `${meta.id}/${ACTION_SUCCESS}`,
   payload: result,
   meta: {
     ...meta,
@@ -24,7 +24,7 @@ const success = (result: any, meta: any) => ({
 });
 
 const failure = (error: any, meta: any) => ({
-  type: `${meta.id}/ACTION/FAILURE`,
+  type: `${meta.id}/${ACTION_FAILURE}`,
   payload: error,
   meta: {
     ...meta,
