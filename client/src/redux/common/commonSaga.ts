@@ -4,6 +4,8 @@ import { ACTION_SUCCESS, ACTION_FAILURE } from '../../utils/actionsCreator';
 
 export default function* commonSaga(actionState: any) {
   try {
+    // TODO - use select() effect to get state and return if 'shouldCall' is false (add shouldCall to actionState)
+
     const result = yield call(actionState.func, actionState.payload);
     yield put(success(result, actionState.meta));
   } catch (e) {

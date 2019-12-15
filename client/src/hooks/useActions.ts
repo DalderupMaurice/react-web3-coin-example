@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */ 
+
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 
-export default function useActions(actions: any, deps: any) {
+export default function useActions(actions: any, deps: any = []) {
   const dispatch = useDispatch();
   return useMemo(
     () => {
