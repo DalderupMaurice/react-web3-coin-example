@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 
-import { ACTION_SUCCESS, ACTION_FAILURE } from '../../utils/actionsCreator';
+import { ACTION_SUCCESS, ACTION_FAILURE } from '../../utils/constants';
 
 export default function* commonSaga(actionState: any) {
   try {

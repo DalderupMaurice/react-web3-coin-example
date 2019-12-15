@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { fork, take, cancel } from "redux-saga/effects";
 
 import commonSaga from "../common/commonSaga";
-import { ACTION_CALL, ACTION_RESET } from "../../utils/actionsCreator";
+import { ACTION_CALL, ACTION_RESET } from "../../utils/constants";
 
 // Custom implementation of takeLatest
 const takeLatestById = (pattern: any, saga: any, ...args: any) =>

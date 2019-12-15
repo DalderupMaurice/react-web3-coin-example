@@ -1,5 +1,5 @@
 import { get, set } from "lodash";
-import globalInitialState, { commonInitialState } from "../config/initialState";
+import globalInitialState from "../initialState";
 import {
   ACTION_CALL,
   ACTION_SUCCESS,
@@ -8,8 +8,10 @@ import {
   ACTION_FAILURE,
   FAILED,
   ACTION_RESET,
-  ACTION_CANCEL
-} from "../../utils/actionsCreator";
+  ACTION_CANCEL,
+  ACTION_TYPES,
+  commonInitialState
+} from "../../utils/constants";
 
 // TODO cleanup this file
 const commonReducer = (
@@ -74,10 +76,4 @@ function isRecognizedType(action: Object): boolean {
   return ACTION_TYPES.includes(actionType);
 }
 
-const ACTION_TYPES = [
-  ACTION_CALL,
-  ACTION_CANCEL,
-  ACTION_SUCCESS,
-  ACTION_FAILURE,
-  ACTION_RESET
-];
+
