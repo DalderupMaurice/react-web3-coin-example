@@ -72,7 +72,7 @@ export default function(
 }
 
 function isRecognizedType(action: Object): boolean {
-  const actionType = get(action, "meta.type") || get(action, "type");
+  const actionType = get(action, "meta.type");
   return ACTION_TYPES.includes(actionType);
 }
 

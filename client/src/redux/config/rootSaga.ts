@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { fork, take, cancel } from "redux-saga/effects";
 
 import commonSaga from "../common/commonSaga";
-import { ACTION_CALL, ACTION_RESET } from "../../utils/constants";
+import { ACTION_CALL, ACTION_RESET, ACTION_CANCEL } from "../../utils/constants";
 
 // Custom implementation of takeLatest
 const takeLatestById = (pattern: any, saga: any, ...args: any) =>
@@ -30,6 +30,7 @@ export default function* rootSage() {
   yield takeLatestById(
     (action: Action) =>
       action.type.includes(ACTION_CALL) ||
+      action.type.includes(ACTION_CANCEL) ||
       action.type.includes(ACTION_RESET),
     commonSaga
   );

@@ -1,18 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserActions from "../../redux/actions/web3Actions"
 import PindaActions from "../../redux/actions/pindaActions"
 import useActions from "../../hooks/useActions";
 
+// TODO dispatch normal redux saga action to verify everything is working
 const RegisterUser = React.memo((props: any) => {
   const { data, error, loadedCount, progress, rollbackProgress } = useSelector((state: any) => state.nos.myActionId);
-  const second = useSelector((state: any) => state.nos.mySecondAction);
 
-  // Optionally to bundle multiple actions
+  // Optionally to bind multiple actions
   const [ userActions, pindaActions ] = useActions([ UserActions, PindaActions ]);
 
   // Single action mapping
-  const registerAction = useActions(userActions);
+  const registerAction = useActions(UserActions);
 
   return (
     <>
@@ -22,15 +22,20 @@ const RegisterUser = React.memo((props: any) => {
       <h1>Rollback Progress: {rollbackProgress}</h1>
       <h1>Data: {JSON.stringify(data)}</h1>
       <h1>Error: {JSON.stringify(error)}</h1>
-      <button onClick={() => userActions.call(`Pingu-${Math.random()}`)}>User Actions Multi map call</button>
       <br />
       <br />
-      <button onClick={() => registerAction.call(`Pingu-${Math.random()}`)}>Use Action Single map call</button>
-      <button onClick={() => registerAction.cancel()}>Cancel User Actions</button>
-      <button onClick={() => registerAction.reset()}>Reset User Actions</button>
+      <h3>Multi Bind</h3>
+      <button onClick={() => userActions.call(`Pingu-${Math.random()}`)}>User call</button>
       <br />
       <br />
-      <button onClick={() => pindaActions.call(`Pingu-${Math.random()}`)}>Pinda Actions Multi map call</button>
+      <h3>Single Bind</h3>
+      <button onClick={() => registerAction.call(`Pingu-${Math.random()}`)}>User call</button>
+      <button onClick={() => registerAction.cancel()}>Cancel User call</button>
+      <button onClick={() => registerAction.reset()}>Reset User call</button>
+      <br />
+      <br />
+      <h3>Pinda Action Multi Bind</h3>
+      <button onClick={() => pindaActions.call(`Pingu-${Math.random()}`)}>Pinda Actions </button>
     </>
   );
 });
