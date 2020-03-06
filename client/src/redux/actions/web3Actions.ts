@@ -1,12 +1,17 @@
 import actionsCreator from "../../utils/actionsCreator";
 import Web3Service from "../../services/Web3Service";
 
-const id = "myActionId";
+const id = "mySecondActionId";
 
-const userActions = actionsCreator(id, async (a: any, b: any, c: any, d: any) => {
-  console.log('Params UserActions ', a, b, c, d);
-  const result = await new Web3Service().register(a);
-  return result;
+type Donut = {
+  shape: string;
+}
+
+const pindaActions = actionsCreator<Donut, Donut[]>(id, async (a: Donut) => {
+  console.log('Params PindaActions ', a);
+  const result = await new Web3Service().register(a.shape);
+  return [a, a];
 });
 
-export default userActions;
+export default pindaActions;
+

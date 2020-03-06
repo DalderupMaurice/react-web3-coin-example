@@ -13,10 +13,43 @@ import {
   commonInitialState
 } from "../../utils/constants";
 
+
+import { StateType, ActionType, createReducer, Action, createAction, createAsyncAction, createCustomAction } from 'typesafe-actions';
+import rootActions from "../config/rootActions";
+import { RootState } from "../config/rootStates";
+
+interface ActionRequest {
+  shape: string;
+}
+interface ActionResponse {
+  donut: boolean;
+}
+interface ActionError {
+  message: string;
+}
+interface meta {
+  type: string;
+  id: string;
+}
+const actionWithMeta = createAsyncAction(
+  'REQ_TYPE', 'SUCCESS_TYPE', 'FAILURE_TYPE', 'CANCEL_TYPE',
+)<[ActionRequest, meta], [ActionResponse, meta], [ActionError, meta], [undefined, meta]>();
+const x = actionWithMeta.success({ donut: true }, { type: "ke ", id: "1"})
+
+const allActions = {
+  ...actionWithMeta
+}
+
+const action2 = createCustomAction('TYPE2', (name: string, id: string) => ({
+  payload: name, meta: { oe: "ah" },
+}));
+
+type RootAction = ActionType<typeof rootActions>;
+
 // TODO cleanup this file
 const commonReducer = (
-  state: State = commonInitialState,
-  actionState: ActionState
+  state: RootState = commonInitialState,
+  actionState: RootAction
 ) => {
   switch (actionState.meta.type) {
     case ACTION_CALL:
@@ -47,7 +80,7 @@ const commonReducer = (
   }
 };
 
-function actionReducer(state: Object = {}, actionState: ActionState): Object {
+function actionReducer(state: Object = {}, actionState: RootAction) {
   const { id, type } = actionState.meta;
 
   if (type) {
@@ -58,9 +91,9 @@ function actionReducer(state: Object = {}, actionState: ActionState): Object {
 }
 
 export default function(
-  state: Object = globalInitialState,
-  action: ActionState
-): Object {
+  state = globalInitialState,
+  action: RootAction
+): RootState {
   if (isRecognizedType(action)) {
     return {
       ...state,
@@ -71,7 +104,7 @@ export default function(
   }
 }
 
-function isRecognizedType(action: Object): boolean {
+function isRecognizedType(action: RootAction): boolean {
   const actionType = get(action, "meta.type");
   return ACTION_TYPES.includes(actionType);
 }

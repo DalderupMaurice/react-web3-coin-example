@@ -3,7 +3,7 @@ import { routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
-import createRootReducer from './combinedReducers';
+import createRootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
 export default function configureStore(initialState: any, history: any) {

@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import UserActions from "../../redux/actions/web3Actions"
 import PindaActions from "../../redux/actions/pindaActions"
 import useActions from "../../hooks/useActions";
+import { useDispatch } from 'react-redux';
+import useSelector from '../../hooks/useSelector';
 
 // TODO dispatch normal redux saga action to verify everything is working
 const RegisterUser = React.memo((props: any) => {
-  const { data, error, loadedCount, progress, rollbackProgress } = useSelector((state: any) => state.nos.myActionId);
+  const { data, error, loadedCount, progress, rollbackProgress } = useSelector(state => state.nos.data);
+  const dispatch = useDispatch(PindaActions.call({ shape: "string" }))
 
   // Optionally to bind multiple actions
   const [ userActions, pindaActions ] = useActions([ UserActions, PindaActions ]);

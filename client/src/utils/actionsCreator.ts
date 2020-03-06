@@ -1,3 +1,5 @@
+import { createCustomAction } from "typesafe-actions";
+
 import { ACTION_CALL, ACTION_CANCEL, ACTION_SUCCESS, ACTION_FAILURE, ACTION_RESET } from "./constants";
 
 const createActionTypes = (statePath: string) => ({
@@ -8,28 +10,56 @@ const createActionTypes = (statePath: string) => ({
   RESET: `${statePath}/${ACTION_RESET}`
 });
 
-export default function createActions(id: string, createAdaptor: any) {
+export default function createActions<T, P>(
+  id: string,
+  createAdaptor: (data: T, prevData?: P) => Promise<P>,
+  options?: any
+) {
   const actionTypes = createActionTypes(id);
 
-  const call = (props: any) => ({
+  const call = createCustomAction(actionTypes.CALL, (props: T) => ({
     type: actionTypes.CALL,
     types: actionTypes,
     meta: { type: ACTION_CALL, id },
     func: createAdaptor,
-    payload: props
-  });
+    payload: props,
+    cache: options?.cache
+  }));
 
-  const cancel = () => ({
+  const cancel = createCustomAction(actionTypes.CANCEL, () => ({
     type: actionTypes.CANCEL,
     types: actionTypes,
-    meta: { type: ACTION_CANCEL, id }
-  });
+    meta: { type: ACTION_CANCEL, id },
+    payload: undefined
+  }));
 
-  const reset = () => ({
+  const reset = createCustomAction(actionTypes.RESET, () => ({
     type: actionTypes.RESET,
     types: actionTypes,
-    meta: { type: ACTION_RESET, id }
-  });
+    meta: { type: ACTION_RESET, id },
+    payload: undefined
+  }));
+
+  // const call = (props: T) => ({
+  //   type: actionTypes.CALL,
+  //   types: actionTypes,
+  //   meta: { type: ACTION_CALL, id },
+  //   func: createAdaptor,
+  //   payload: props,
+  //   cache: options?.cache
+  // });
+
+  // const cancel = () => ({
+  //   type: actionTypes.CANCEL,
+  //   types: actionTypes,
+  //   meta: { type: ACTION_CANCEL, id }
+  // });
+
+  // const reset = () => ({
+  //   type: actionTypes.RESET,
+  //   types: actionTypes,
+  //   meta: { type: ACTION_RESET, id }
+  // });
 
   // Optional named return values
   // return {
@@ -48,13 +78,3 @@ export default function createActions(id: string, createAdaptor: any) {
     actionTypes
   };
 }
-
-// Desired output:
-// export function loadPosts(userId) {
-//   return {
-//     types: ["LOAD_POSTS_REQUEST", "LOAD_POSTS_SUCCESS", "LOAD_POSTS_FAILURE"],
-//     shouldExecute: state => !state.posts[userId], --> optional
-//     func: () => ({ functionReturningSomething }),
-//     payload: { userId }
-//   };
-// }
