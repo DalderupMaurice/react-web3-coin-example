@@ -7,7 +7,7 @@ import useSelector from '../../hooks/useSelector';
 
 // TODO dispatch normal redux saga action to verify everything is working
 const RegisterUser = React.memo((props: any) => {
-  const { data, error, loadedCount, progress, rollbackProgress } = useSelector(state => state.nos.data);
+  const { data, error, loadedCount, progress, rollbackProgress } = useSelector(state => state.nos.myActionId);
   const dispatch = useDispatch(PindaActions.call({ shape: "string" }))
 
   // Optionally to bind multiple actions

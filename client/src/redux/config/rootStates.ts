@@ -12,5 +12,15 @@ interface IUserReducerState2 extends State {
     }
 }
 
+// export type IState = {
+//     myActionId: import('../todo/todo.types').ITodoState;
+//     // ... more state slices
+//   };
 
-export type RootState = IUserReducerState | IUserReducerState2;
+export type RootState = {
+    myActionId: IUserReducerState2;
+    // ... more state slices
+  };
+
+
+// export type RootState = IUserReducerState | IUserReducerState2;
