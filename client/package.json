@@ -9,7 +9,7 @@
     "test:local": "jest --all --verbose --coverage"
   },
   "dependencies": {
-    "antd": "3.22.1",
+    "antd": "3.26.20",
     "axios": "0.19.0",
     "babel-polyfill": "6.26.0",
     "lodash": "4.17.14",
